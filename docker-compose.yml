@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  snippetboxdb:
+    image: mysql:8.0
+    container_name: snippetboxdb
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql # Contraseña para el usuario root
+      - MYSQL_DATABASE=snippetbox      # Nombre de la base de datos a crear
+      - MYSQL_USER=mysql          # Nuevo usuario (no root)
+      - MYSQL_PASSWORD=mysql      # Contraseña para el nuevo usuario
+    ports:
+      - "3306:3306" # Cambiado a puerto predeterminado de MySQL
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
