@@ -54,7 +54,8 @@ func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 	content := "O snail\nClimb Mount Fuji,\nBut slowly, slowly!\n\n– Kobayashi Issa"
 	expires := 7
 
-	id, err := app.snippets.Insert(title, content, expires)
+	expiresStr := strconv.Itoa(expires)
+	id, err := app.snippets.Insert(title, content, expiresStr)
 	if err != nil {
 		app.serverError(w, err)
 		return
