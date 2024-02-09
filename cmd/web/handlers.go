@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
-	"text/template"
 
 	"github.com/Geovanny0401/snippetbox/internal/models"
 )
@@ -16,22 +15,35 @@ func (app *application) home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	files := []string{
-		"./ui/html/pages/home.tmpl",
-		"./ui/html/pages/base.tmpl",
-		"./ui/html/pages/footer.tmpl",
-	}
-
-	ts, err := template.ParseFiles(files...)
+	snippets, err := app.snippets.Latest()
 	if err != nil {
 		app.serverError(w, err)
 		return
 	}
 
-	err = ts.Execute(w, nil)
-	if err != nil {
-		app.serverError(w, err)
+	for _, snippet := range snippets {
+		fmt.Fprintf(w, "%+v\n", snippet)
 	}
+	/*
+	   	files := []string{
+	   		"./ui/html/pages/home.tmpl",
+	   		"./ui/html/pages/base.tmpl",
+	   		"./ui/html/pages/footer.tmpl",
+	   	}
+
+	   ts, err := template.ParseFiles(files...)
+
+	   	if err != nil {
+	   		app.serverError(w, err)
+	   		return
+	   	}
+
+	   err = ts.Execute(w, nil)
+
+	   	if err != nil {
+	   		app.serverError(w, err)
+	   	}
+	*/
 }
 
 func (app *application) snippetView(w http.ResponseWriter, r *http.Request) {
