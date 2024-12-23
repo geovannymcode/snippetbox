@@ -1,3 +1,3 @@
 # snippetbox
 
-Proyecto en Golang
+Proyecto de Golang
