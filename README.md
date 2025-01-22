@@ -6,7 +6,7 @@
 
 ### Go Module Information
 
-Code in gonlag
+Code in Golang
 
 **Module:** `github.com/Geovanny0401/snippetbox`  
 **Go Version:** `1.21.6`
